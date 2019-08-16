@@ -58,3 +58,22 @@ class ProjectManager extends Instructor {
         console.log(`${this.name} debugs ${student.name}'s code on ${subject}`);
     }
 }
+
+
+const jimmy = new Person({
+    name: "Jimmy",
+    age: "42",
+    location: "Nashville, TN"
+});
+jimmy.speak();
+const Bob = new Person({
+    name: "Bob",
+    age: "42",
+    location: "London, England"
+});
+const Billy = new Person({
+    name: "Billy",
+    age: "42",
+    location: "Paris, France"
+});
+
