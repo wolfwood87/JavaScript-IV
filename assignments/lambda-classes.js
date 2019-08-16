@@ -23,6 +23,19 @@ class Instructor extends Person {
     grade(student, subject) {
         console.log(`${student.name} receives a perfect score on ${subject}.`);
     }
+    review(student) {
+        let number = Math.floor((Math.random() * 15) + 1);
+        let posOrNeg = Math.random();
+        if(posOrNeg < .5){
+            posOrNeg = 1;
+        } 
+        else{
+            posOrNeg = -1;
+        }
+        number = number * posOrNeg;
+        student.grade = student.grade + number;
+        console.log(`${this.name} has reviewed ${student.name}'s grade and has adjusted it by ${number}. Their new grade is ${student.grade}.`)
+    }
 }
 
 class Student extends Person{
@@ -31,6 +44,7 @@ class Student extends Person{
         this.previousBackground = learn.previousBackground;
         this.className = learn.className;
         this.favSubjects = learn.favSubjects;
+        this.grade = learn.grade;
     }
     listsSubjects() {
         for(let i = 0; i < this.favSubjects.length; i++){
@@ -110,6 +124,7 @@ const whitney = new Student ({
     age: 18,
     location: 'Chicago',
     className: 'webpt9',
+    grade: 80,
     previousBackground: 'Waitress',
     favSubjects: ['Javascript', 'Physics', 'Anything new']
 });
@@ -119,6 +134,7 @@ const peter = new Student ({
     name: 'Peter',
     age: 21,
     location: 'Alabama',
+    grade: 90,
     className: 'web22',
     previousBackground: 'Police Officer',
     favSubjects: ['Reading', 'Fishing']
@@ -127,6 +143,7 @@ const peter = new Student ({
 const john = new Student ({
     name: 'John',
     age: 48,
+    grade: 65,
     location: 'Germany',
     className: 'webpt7',
     previousBackground: 'IT',
@@ -176,3 +193,5 @@ peter.sprintChallenge("Javascript Fundamentals");
 john.PRAssignment('React');
 nate.standUp('webpt9');
 jane.debugsCode(john, "HTML");
+gina.review(john);
+jane.review(john);
