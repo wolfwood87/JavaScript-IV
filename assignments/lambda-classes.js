@@ -66,14 +66,42 @@ const jimmy = new Person({
     location: "Nashville, TN"
 });
 jimmy.speak();
-const Bob = new Person({
+const bob = new Person({
     name: "Bob",
-    age: "42",
+    age: "45",
     location: "London, England"
 });
-const Billy = new Person({
+const billy = new Person({
     name: "Billy",
-    age: "42",
+    age: "21",
     location: "Paris, France"
 });
 
+const james = new Instructor({
+    name: 'James',
+    location: 'Earth',
+    age: 28,
+    favLanguage: 'Python',
+    specialty: 'Back-end',
+    catchPhrase: 'Catch ya on the flip side.'
+});
+
+console.log(james.catchPhrase);
+
+const jennifer = new Instructor({
+    name: 'Jennifer',
+    location: 'New York',
+    age: 31,
+    favLanguage: 'Javascript',
+    specialty: 'Front-end',
+    catchPhrase: 'Right back atcha.'
+});
+
+const sally = new Instructor({
+    name: 'Sally',
+    location: 'Kansas City',
+    age: 22,
+    favLanguage: 'Java',
+    specialty: 'Mobile',
+    catchPhrase: 'Sorry not sorry.'
+});
