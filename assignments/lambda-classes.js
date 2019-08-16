@@ -49,7 +49,7 @@ class ProjectManager extends Instructor {
     constructor(pm) {
         super(pm);
         this.gradClassName = pm.gradClassName;
-        this.favInstructoor = pm.favInstructor;
+        this.favInstructor = pm.favInstructor;
     }
     standUp(channel) {
         console.log(`${this.name} announces to ${channel} @channel standy times!`);
@@ -105,3 +105,32 @@ const sally = new Instructor({
     specialty: 'Mobile',
     catchPhrase: 'Sorry not sorry.'
 });
+
+const whitney = new Student ({
+    name: 'Whitney',
+    age: 18,
+    location: 'Chicago',
+    className: 'webpt9',
+    previousBackground: 'Waitress',
+    favSubjects: ['Javascript', 'Physics', 'Anything new']
+});
+whitney.listsSubjects();
+
+const peter = new Student ({
+    name: 'Peter',
+    age: 21,
+    location: 'Alabama',
+    className: 'web22',
+    previousBackground: 'Police Officer',
+    favSubjects: ['Reading', 'Fishing']
+});
+
+const john = new Student ({
+    name: 'John',
+    age: 48,
+    location: 'Germany',
+    className: 'webpt7',
+    previousBackground: 'IT',
+    favSubjects: ['Woodwork', 'Java', 'Python']
+});
+
