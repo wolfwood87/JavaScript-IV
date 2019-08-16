@@ -86,7 +86,6 @@ const james = new Instructor({
     catchPhrase: 'Catch ya on the flip side.'
 });
 
-console.log(james.catchPhrase);
 
 const jennifer = new Instructor({
     name: 'Jennifer',
@@ -114,7 +113,7 @@ const whitney = new Student ({
     previousBackground: 'Waitress',
     favSubjects: ['Javascript', 'Physics', 'Anything new']
 });
-whitney.listsSubjects();
+
 
 const peter = new Student ({
     name: 'Peter',
@@ -124,7 +123,7 @@ const peter = new Student ({
     previousBackground: 'Police Officer',
     favSubjects: ['Reading', 'Fishing']
 });
-peter.sprintChallenge("Javascript Fundamentals")
+
 const john = new Student ({
     name: 'John',
     age: 48,
@@ -133,7 +132,7 @@ const john = new Student ({
     previousBackground: 'IT',
     favSubjects: ['Woodwork', 'Java', 'Python']
 });
-john.PRAssignment('React')
+
 const nate = new ProjectManager ({
     name: 'Nate',
     age: 24,
@@ -144,7 +143,7 @@ const nate = new ProjectManager ({
     gradClassName: 'webpt1',
     favInstructor: 'Sean'
 });
-nate.standUp('webpt9');
+
 
 const jane = new ProjectManager ({
     name: 'Jane',
@@ -156,7 +155,7 @@ const jane = new ProjectManager ({
     gradClassName: 'web1',
     favInstructor: 'Pace'
 });
-jane.debugsCode(john, "HTML");
+
 const gina = new ProjectManager ({
     name: 'Gina',
     age: 28,
@@ -167,3 +166,13 @@ const gina = new ProjectManager ({
     gradClassName: 'web18',
     favInstructor: 'Jennifer'
 });
+
+
+console.log(james.catchPhrase);
+jennifer.demo('LESS');
+sally.grade(peter, "Applied Javascript");
+whitney.listsSubjects();
+peter.sprintChallenge("Javascript Fundamentals");
+john.PRAssignment('React');
+nate.standUp('webpt9');
+jane.debugsCode(john, "HTML");
