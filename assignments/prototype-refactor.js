@@ -25,15 +25,17 @@ Prototype Refactor
   * dimensions (These represent the character's size in the video game)
   * destroy() // prototype method that returns: `${this.name} was removed from the game.`
 */
-function GameObject(obj) {
+class GameObject {
+    constructor(obj) {
     this.createdAt = obj.createdAt;
     this.name = obj.name;
     this.dimensions = obj.dimensions;
-    
+    }
+    destroy() {
+        return `${this.name} was removed from the game`;
+    }
   }
-  GameObject.prototype.destroy = function () {
-    return `${this.name} was removed from the game`;
-  }
+  
   
   /*
     === CharacterStats ===
@@ -41,17 +43,15 @@ function GameObject(obj) {
     * takeDamage() // prototype method -> returns the string '<object name> took damage.'
     * should inherit destroy() from GameObject's prototype
   */
-  function CharacterStats(charAttr) {
-    GameObject.call(this, charAttr);
+class CharacterStats extends GameObject {
+    constructor(charAttr) {
+    super(charAttr);
     this.healthPoints = charAttr.healthPoints;
   }
-  
-  CharacterStats.prototype = Object.create(GameObject.prototype);
-  
-  CharacterStats.prototype.takeDamage = function () {
+  takeDamage() {
     return `${this.name} took damage.`;
   }
-  
+}
   
   
   /*
@@ -63,100 +63,94 @@ function GameObject(obj) {
     * should inherit destroy() from GameObject through CharacterStats
     * should inherit takeDamage() from CharacterStats
   */
-   function Humanoid(humStats) {
-     CharacterStats.call(this, humStats);
+class Humanoid extends CharacterStats {
+     constructor(humStats) {
+     super(humStats);
      this.team = humStats.team;
      this.weapons = humStats.weapons;
      this.language = humStats.language;
-   }
-  Humanoid.prototype = Object.create(CharacterStats.prototype);
-  
-  Humanoid.prototype.greet = function () {
-    return `${this.name} offers a greeting in ${this.language}.`;
-  }
-  
-  
-  
-  function Hero(good) {
-    Humanoid.call(this, good);
-  }
-  
-  Hero.prototype = Object.create(Humanoid.prototype);
-  
-  function Villain(bad) {
-    Humanoid.call(this, bad);
-  }
-  
-  Villain.prototype = Object.create(Humanoid.prototype);
-  
-  Hero.prototype.attack = function (att1, att2) {
-    const damage = Math.floor((Math.random() * 5) + 1);
-    this.goodhealth = att1.healthPoints;
-    this.badhealth = att2.healthPoints;
-    if(this.goodhealth <= 0){
-      return "Dead people can't attack";
     }
-    else if(this.badhealth <= 0){
-      return `${this.name} wins!`;
+    greet() {
+        return `${this.name} offers a greeting in ${this.language}.`;
     }
-    else{
-      att2.healthPoints = this.badhealth - damage;
+}  
   
-      if(att2.healthPoints <= 0){
-        return att2.destroy();
-      }
-      else{
-        return "Villain has " + att2.healthPoints + " health remaining";
-      }
+  
+class Hero extends Humanoid {
+    constructor(good) {
+    super(good);
     }
-  }
+    attack(att1, att2) {
+        const damage = Math.floor((Math.random() * 5) + 1);
+        this.goodhealth = att1.healthPoints;
+        this.badhealth = att2.healthPoints;
+        if(this.goodhealth <= 0){
+          return "Dead people can't attack";
+        }
+        else if(this.badhealth <= 0){
+          return `${this.name} wins!`;
+        }
+        else{
+          att2.healthPoints = this.badhealth - damage;
+      
+          if(att2.healthPoints <= 0){
+            return att2.destroy();
+          }
+          else{
+            return "Villain has " + att2.healthPoints + " health remaining";
+          }
+        }
+    }
+    heal(att) {
+        const heal = Math.floor((Math.random() * 10) + 1);
+        if(this.healthPoints <=0) {
+            return "Dead people can't heal";
+        }
+        else{
+            this.healthPoints = att.healthPoints + heal;
+            return "Hero has healed and now has " + this.healthPoints + " health remaining.";
+        }
+    }
+}
   
-  Hero.prototype.heal = function (att) {
-    const heal = Math.floor((Math.random() * 10) + 1);
+  
+class Villain extends Humanoid {
+    constructor(bad) {
+    super(bad);
+    }
+    attack(att1, att2) {
+        const damage = Math.floor((Math.random() * 5) + 1);
+        this.badhealth = att1.healthPoints;
+        this.goodhealth = att2.healthPoints;
+        if(this.badhealth <= 0){
+            return "Dead people can't attack";
+        }
+        else if(this.goodhealth <= 0){
+            return `${this.name} wins!`;
+        }
+        else{
+            att2.healthPoints = this.goodhealth - damage;
+  
+            if(att2.healthPoints <= 0){
+                return att2.destroy();
+            }
+            else{
+                return "Hero has " + att2.healthPoints + " health remaining";
+            }
+        }
+    }
+    heal(att) {
+        const heal = Math.floor((Math.random() * 10) + 1);
     
-    if(this.healthPoints <=0) {
-      return "Dead people can't heal";
+        if(this.healthPoints <=0) {
+            return "Dead people can't heal";
+        }
+        else{
+            this.healthPoints = att.healthPoints + heal;
+            return "Villain has healed and now has " + this.healthPoints + " health remaining.";
+        }
     }
-    else{
-      this.healthPoints = att.healthPoints + heal;
-      return "Hero has healed and now has " + this.healthPoints + " health remaining.";
-    }
-  }
-  
-  
-  Villain.prototype.attack = function (att1, att2) {
-    const damage = Math.floor((Math.random() * 5) + 1);
-    this.badhealth = att1.healthPoints;
-    this.goodhealth = att2.healthPoints;
-    if(this.badhealth <= 0){
-      return "Dead people can't attack";
-    }
-    else if(this.goodhealth <= 0){
-      return `${this.name} wins!`;
-    }
-    else{
-      att2.healthPoints = this.goodhealth - damage;
-  
-      if(att2.healthPoints <= 0){
-        return att2.destroy();
-      }
-      else{
-        return "Hero has " + att2.healthPoints + " health remaining";
-      }
-    }
-  }
-  
-  Villain.prototype.heal = function (att) {
-    const heal = Math.floor((Math.random() * 10) + 1);
-    
-    if(this.healthPoints <=0) {
-      return "Dead people can't heal";
-    }
-    else{
-      this.healthPoints = att.healthPoints + heal;
-      return "Villain has healed and now has " + this.healthPoints + " health remaining.";
-    }
-  }
+}
   /*
     * Inheritance chain: GameObject -> CharacterStats -> Humanoid
     * Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.
@@ -278,8 +272,13 @@ function GameObject(obj) {
     console.log(goldlight.attack(goldlight, evillaugh));
     console.log(evillaugh.attack(evillaugh, goldlight));
     console.log(goldlight.attack(goldlight, evillaugh));
+    console.log(goldlight.attack(goldlight, evillaugh));
+    console.log(goldlight.attack(goldlight, evillaugh));
     console.log(evillaugh.attack(evillaugh, goldlight));
     console.log(goldlight.heal(goldlight));
+    console.log(goldlight.attack(goldlight, evillaugh));
     // console.log(goldlight.attack(goldlight, evillaugh));
+    console.log(evillaugh.attack(evillaugh, goldlight));
+    console.log(evillaugh.attack(evillaugh, goldlight));
     console.log(evillaugh.attack(evillaugh, goldlight));
     console.log(evillaugh.attack(evillaugh, goldlight));
