@@ -6,7 +6,7 @@ class Person {
         this.location = base.location;
     }
     speak() {
-        console.log(`Hello my name is ${this.name}, I am from ${this.location}`);
+        console.log(`Hello my name is ${this.name}, I am from ${this.location}.`);
     }
 }
 
@@ -18,10 +18,10 @@ class Instructor extends Person {
         this.catchPhrase = teach.catchPhrase;
     }
     demo(subject) {
-        console.log(`Today we are learning about ${subject}`);
+        console.log(`Today we are learning about ${subject}.`);
     }
     grade(student, subject) {
-        console.log(`${student.name} receives a perfect score on ${subject}`);
+        console.log(`${student.name} receives a perfect score on ${subject}.`);
     }
 }
 
@@ -38,10 +38,10 @@ class Student extends Person{
         }
     }
     PRAssignment(subject) {
-        console.log(`${this.name} has submitted a PR for ${subject}`);
+        console.log(`${this.name} has submitted a PR for ${subject}.`);
     }
     sprintChallenge(subject) {
-        console.log(`${this.name} has begun sprint challenge on ${subject}`);
+        console.log(`${this.name} has begun sprint challenge on ${subject}.`);
     }
 }
 
@@ -55,7 +55,7 @@ class ProjectManager extends Instructor {
         console.log(`${this.name} announces to ${channel} @channel standy times!`);
     } 
     debugsCode(student, subject) {
-        console.log(`${this.name} debugs ${student.name}'s code on ${subject}`);
+        console.log(`${this.name} debugs ${student.name}'s code on ${subject}.`);
     }
 }
 
@@ -124,7 +124,7 @@ const peter = new Student ({
     previousBackground: 'Police Officer',
     favSubjects: ['Reading', 'Fishing']
 });
-
+peter.sprintChallenge("Javascript Fundamentals")
 const john = new Student ({
     name: 'John',
     age: 48,
@@ -133,4 +133,37 @@ const john = new Student ({
     previousBackground: 'IT',
     favSubjects: ['Woodwork', 'Java', 'Python']
 });
+john.PRAssignment('React')
+const nate = new ProjectManager ({
+    name: 'Nate',
+    age: 24,
+    location: 'San Jose',
+    favLanguage: 'Javascript',
+    speciality: 'Front End',
+    catchPhrase: 'Dad jokes all around.',
+    gradClassName: 'webpt1',
+    favInstructor: 'Sean'
+});
+nate.standUp('webpt9');
 
+const jane = new ProjectManager ({
+    name: 'Jane',
+    age: 34,
+    location: 'Los Angeles',
+    favLanguage: 'Javascript',
+    speciality: 'React',
+    catchPhrase: "The world needs more love.",
+    gradClassName: 'web1',
+    favInstructor: 'Pace'
+});
+jane.debugsCode(john, "HTML");
+const gina = new ProjectManager ({
+    name: 'Gina',
+    age: 28,
+    location: 'Italy',
+    favLanguage: 'Ruby',
+    speciality: 'Back end',
+    catchPhrase: "Don't make me turn this class around.",
+    gradClassName: 'web18',
+    favInstructor: 'Jennifer'
+});
